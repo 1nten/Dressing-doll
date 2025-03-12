@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> 欢迎回来捏～ </title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <h1> 欢迎回来喵～ </h1>
+
+    <!-- 🔍 搜索框 -->
+    <input type="text" id="search" placeholder="🔍 " onkeyup="filterImages()">
+
+    <!-- 🌟 主题切换按钮 -->
+    <button class="switch-theme" onclick="toggleTheme()">🌟</button>
+
+    <!-- 📄 图片列表 -->
+    <div class="container" id="imageContainer">
+        {% for item in images %}
+        <div class="item">
+            <img src="{{ item.image }}" alt="图片">
+            <p class="copy-text" onclick="copyText(this)">{{ item.text }}</p>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- 📌 翻页按钮 -->
+    <div class="pagination">
+        <button id="prevPage" onclick="changePage(-1)">« 上一页</button>
+        <span id="pageInfo"></span>
+        <button id="nextPage" onclick="changePage(1)">下一页 »</button>
+    </div>
+
+    <script>
+        //  🌈 主题切换功能
+        let currentTheme = 'default';
+
+        function toggleTheme() {
+            const body = document.body;
+            if (currentTheme === 'default') {
+                body.classList.add('theme-anime');
+                currentTheme = 'anime';
+            } else {
+                body.classList.remove('theme-anime');
+                currentTheme = 'default';
+            }
+        }
+
+        //  📋 复制文本功能
+        function copyText(element) {
+            const text = element.innerText.trim();
+            if (!text) return;
+
+            navigator.clipboard.writeText(text).then(() => {
+                console.log("已复制: " + text);
+                element.style.background = "var(--button-hover-bg)";
+                element.style.color = "white";
+                setTimeout(() => {
+                    element.style.background = "var(--button-bg)";
+                    element.style.color = "var(--button-text)";
+                }, 1000);
+            }).catch(err => {
+                console.error("复制失败:", err);
+            });
+        }
+
+        //  🔍 搜索功能
+        function filterImages() {
+            let input = document.getElementById("search").value.toLowerCase();
+            let items = document.querySelectorAll(".item");
+
+            items.forEach(item => {
+                let text = item.querySelector(".copy-text").innerText.toLowerCase();
+                if (text.includes(input)) {
+                    item.style.display = "block"; // 匹配显示
+                    item.style.opacity = "1";
+                } else {
+                    item.style.opacity = "0"; // 渐隐动画
+                    setTimeout(() => {
+                        item.style.display = "none";
+                    }, 200);
+                }
+            });
+        }
+        // 🔍 搜索功能 - 关键词高亮
+        function filterImages() {
+            let input = document.getElementById("search").value.trim().toLowerCase();
+            let items = document.querySelectorAll(".item");
+
+            items.forEach(item => {
+                let textElement = item.querySelector(".copy-text");
+                let originalText = textElement.getAttribute("data-original-text") || textElement.innerText;
+
+                if (input) {
+                    let regex = new RegExp(`(${input})`, "gi");
+                    let highlightedText = originalText.replace(regex, `<span class="highlight">$1</span>`);
+                    textElement.innerHTML = highlightedText;
+                } else {
+                    textElement.innerHTML = originalText;
+                }
+
+                if (originalText.toLowerCase().includes(input)) {
+                    item.style.display = "block";
+                    setTimeout(() => { item.style.opacity = "1"; }, 100);
+                } else {
+                    item.style.opacity = "0";
+                    setTimeout(() => { item.style.display = "none"; }, 200);
+                }
+
+                textElement.setAttribute("data-original-text", originalText);
+            });
+        }
+        //  📄 翻页功能
+        let currentPage = 1;
+        const itemsPerPage = 50;
+        let items = document.querySelectorAll(".item");
+
+        function showPage(page) {
+            let start = (page - 1) * itemsPerPage;
+            let end = start + itemsPerPage;
+
+            items.forEach((item, index) => {
+                if (index >= start && index < end) {
+                    item.style.display = "block";
+                    setTimeout(() => { item.style.opacity = "1"; }, 100);
+                } else {
+                    item.style.opacity = "0";
+                    setTimeout(() => { item.style.display = "none"; }, 200);
+                }
+            });
+
+            document.getElementById("pageInfo").innerText = `第 ${page} 页 / 共 ${Math.ceil(items.length / itemsPerPage)} 页`;
+            document.getElementById("prevPage").disabled = page === 1;
+            document.getElementById("nextPage").disabled = page === Math.ceil(items.length / itemsPerPage);
+        }
+
+        function changePage(step) {
+            currentPage += step;
+            showPage(currentPage);
+        }
+
+        //  初始化第一页
+        showPage(1);
+    </script>
+</body>
+
+</html>

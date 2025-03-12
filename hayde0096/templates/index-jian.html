@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图片展示</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            padding: 20px;
+        }
+        .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: auto;
+        }
+        .item {
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out;
+        }
+        .item:hover {
+            transform: translateY(-5px);
+        }
+        img {
+            max-width: 100%;
+            border-radius: 10px;
+        }
+        .copy-text {
+            cursor: pointer;
+            color: #007bff;
+            font-weight: bold;
+            text-decoration: underline;
+            margin-top: 10px;
+        }
+        .copy-text:hover {
+            color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>图片展示</h1>
+    <div class="container">
+        {% for item in images %}
+        <div class="item">
+            <img src="{{ item.image }}" alt="图片">
+            <p class="copy-text" onclick="copyText(this)">{{ item.text }}</p>
+        </div>
+        {% endfor %}
+    </div>
+
+    <script>
+        function copyText(element) {
+            const text = element.innerText.trim();
+            if (!text) return;
+
+            navigator.clipboard.writeText(text).then(() => {
+                console.log("已复制: " + text); // 只在控制台显示
+            }).catch(err => {
+                console.error("复制失败:", err);
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,247 @@
+/* 🎀 全局基础样式 */
+body {
+    font-family: "Noto Sans SC", "Arial", sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 30px;
+    transition: background 0.4s ease, color 0.4s ease;
+}
+
+/* 🌸 标题样式 */
+h1 {
+    font-size: 2.8rem;
+    font-weight: bold;
+    margin-bottom: 25px;
+    letter-spacing: 1px;
+    transition: color 0.4s ease;
+}
+
+/* 📦 主容器 */
+.container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+}
+
+/* 🌟 卡片样式 */
+.item {
+    background: var(--card-bg);
+    border-radius: 14px;
+    padding: 18px;
+    box-shadow: 0 6px 14px rgba(140, 120, 150, 0.2);
+    border: 2px solid var(--card-border);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+}
+
+.item:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 24px rgba(120, 100, 150, 0.25);
+}
+
+/* 🖼️ 图片样式 */
+img {
+    max-width: 100%;
+    border-radius: 10px;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.item:hover img {
+    transform: scale(1.02);
+}
+
+/* ✨ 复制文本按钮 */
+.copy-text {
+    cursor: pointer;
+    font-weight: bold;
+    padding: 8px 14px;
+    border-radius: 20px;
+    margin-top: 14px;
+    background: var(--button-bg);
+    color: var(--button-text);
+    border: 2px solid var(--button-border);
+    transition: background 0.3s ease, color 0.3s ease, transform 0.2s;
+}
+
+.copy-text:hover {
+    background: var(--button-hover-bg);
+    color: white;
+    transform: scale(1.05);
+}
+
+/* 🎨 主题切换按钮 */
+.switch-theme {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: var(--button-bg);
+    color: var(--button-text);
+    border: 2px solid var(--button-border);
+    padding: 10px 18px;
+    border-radius: 10px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s ease, color 0.3s ease, transform 0.2s;
+}
+
+.switch-theme:hover {
+    background: var(--button-hover-bg);
+    color: white;
+    transform: scale(1.1);
+}
+
+/* 🌸 主题配色：少女系（默认） */
+/* :root { */
+.theme-anime {
+    --bg-color: linear-gradient(to bottom, #F9F5F6, #E8DAEF);
+    --text-color: #5C4B51;
+    --card-bg: rgba(255, 255, 255, 0.8);
+    --card-border: #C8A9B9;
+    --button-bg: rgba(250, 240, 245, 0.85);
+    --button-text: #7D607F;
+    --button-border: #C4A7B3;
+    --button-hover-bg: rgba(200, 180, 200, 0.9);
+}
+
+/* 🌊 统一蓝白二次元风格（默认） */
+:root {
+/* .theme-anime { */
+    --bg-color: linear-gradient(to bottom, #F0F8FF, #FFFFFF, #D6E6FF); /* 淡蓝→白色→天蓝 */
+    --text-color: #3A4F7A; /* 深蓝色，增强可读性 */
+    --card-bg: rgba(255, 255, 255, 0.95); /* 轻盈白色卡片 */
+    --card-border: #A2B9E1; /* 柔和的浅蓝色边框 */
+    --button-bg: rgba(225, 240, 255, 0.95); /* 淡蓝背景 */
+    --button-text: #4A6FA5; /* 深蓝文字 */
+    --button-border: #87A8D0; /* 浅蓝边框 */
+    --button-hover-bg: rgba(180, 210, 255, 0.9); /* 悬停时加深 */
+    --highlight: #8BB9FF; /* 亮蓝色点缀 */
+    --accent: #A2D2FF; /* 柔和的辅助天蓝 */
+}
+
+/* 🌟 页面背景 */
+body {
+    background: var(--bg-color);
+    color: var(--text-color);
+    transition: all 0.3s ease-in-out;
+}
+
+/* 🎀 卡片风格 */
+.item {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 18px;
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
+    border: 1px solid var(--card-border);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
+}
+
+/* 🖼️ 图片 */
+img {
+    max-width: 100%;
+    border-radius: 10px;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.item:hover img {
+    transform: scale(1.02);
+}
+
+/* 🔵 按钮风格 */
+.switch-theme {
+    background: var(--button-bg);
+    color: var(--button-text);
+    border: 1px solid var(--button-border);
+    padding: 10px 16px;
+    border-radius: 10px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s ease-in-out;
+}
+
+.switch-theme:hover {
+    background: var(--button-hover-bg);
+    transform: scale(1.05);
+}
+
+/* ✨ 交互文字 */
+.copy-text {
+    cursor: pointer;
+    font-weight: bold;
+    color: var(--highlight);
+    margin-top: 10px;
+    transition: color 0.2s;
+}
+
+.copy-text:hover {
+    color: var(--accent);
+}
+
+/* 🔍 搜索框 */
+#search {
+    width: 60%;
+    padding: 10px;
+    font-size: 1rem;
+    border: 2px solid var(--button-border);
+    border-radius: 8px;
+    outline: none;
+    margin-bottom: 20px;
+    transition: border 0.3s ease-in-out;
+}
+
+#search:focus {
+    border-color: var(--highlight);
+}
+
+/* 🔄 过渡动画 */
+.item {
+    transition: opacity 0.3s ease-in-out;
+}
+
+/* 📄 分页按钮 */
+.pagination {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pagination button {
+    background: var(--button-bg);
+    color: var(--button-text);
+    border: 2px solid var(--button-border);
+    padding: 8px 16px;
+    margin: 0 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.3s, transform 0.2s ease-in-out;
+}
+
+.pagination button:hover {
+    background: var(--button-hover-bg);
+    transform: scale(1.05);
+}
+
+.pagination button:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* 💡 搜索关键词高亮 */
+.highlight {
+    background: linear-gradient(90deg, rgba(173, 216, 230, 0.5), rgba(193, 181, 245, 0.5));
+    padding: 2px 4px;
+    border-radius: 4px;
+    font-weight: bold;
+    color: inherit; /* 避免改变原本文字颜色 */
+}
